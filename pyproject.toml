@@ -27,7 +27,8 @@ classifiers = [
 
 [tool.hatch.build.targets.wheel]
 # Tell Hatchling where your package code lives
-packages = ["src/exercises"]
+include = ["src/exercises/**/*"]
+# packages = ["src/exercises"]
 
 dependencies = [
     "numpy>=1.24.0",
