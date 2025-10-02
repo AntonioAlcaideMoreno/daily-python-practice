@@ -25,15 +25,17 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules"
 ]
 
+[tool.hatch.build]
+# Point at your src/ folder as the root of your packages:
+source-directories = ["src"]
+
 [tool.hatch.build.targets.wheel]
-# 1. Tell Hatchling where your code lives on disk
-source-directory = "src"
-# 2. List the importable package names under that directory
+# Refer to the importable package name, not the on-disk path:
 packages = ["exercises"]
 
 [tool.hatch.build.targets.editable]
-# For editable installs, point to the same source root
-path = "src"
+# Same source root for editable installs:
+source-directory = "src"
 
 dependencies = [
     "numpy>=1.24.0",
