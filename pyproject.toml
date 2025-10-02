@@ -26,9 +26,14 @@ classifiers = [
 ]
 
 [tool.hatch.build.targets.wheel]
-# Tell Hatchling where your package code lives
-include = ["src/exercises/**/*"]
-# packages = ["src/exercises"]
+# 1. Tell Hatchling where your code lives on disk
+source-directory = "src"
+# 2. List the importable package names under that directory
+packages = ["exercises"]
+
+[tool.hatch.build.targets.editable]
+# For editable installs, point to the same source root
+path = "src"
 
 dependencies = [
     "numpy>=1.24.0",
