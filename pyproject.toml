@@ -35,7 +35,7 @@ packages = ["exercises"]
 
 [tool.hatch.build.targets.editable]
 # Same source root for editable installs:
-source-directory = "src"
+path = "src"
 
 dependencies = [
     "numpy>=1.24.0",
