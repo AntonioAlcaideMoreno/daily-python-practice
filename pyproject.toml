@@ -28,10 +28,11 @@ classifiers = [
 [tool.hatch.build]
 # Point at your src/ folder as the root of your packages:
 source-directories = ["src"]
+dev-mode-dirs = ["src"]
 
 [tool.hatch.build.targets.wheel]
 # Refer to the importable package name, not the on-disk path:
-packages = ["exercises"]
+packages = ["src/exercises"]
 
 [tool.hatch.build.targets.editable]
 # Same source root for editable installs:
