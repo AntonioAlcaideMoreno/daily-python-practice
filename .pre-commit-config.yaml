@@ -1,6 +1,6 @@
 repos:
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
     -   id: trailing-whitespace
     -   id: end-of-file-fixer
@@ -9,7 +9,7 @@ repos:
     -   id: check-merge-conflict
     -   id: debug-statements
     -   id: detect-private-key
-    -  id: check-added-large-files
+    -   id: check-added-large-files
         args: ["--maxkb=5000000"]
     -   id: detect-aws-credentials
 
@@ -21,7 +21,7 @@ repos:
         args: ["--line-length=88"]
 
 -   repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.13.2
+    rev: v0.13.3
     hooks:
     -   id: ruff
         args: [--fix, --exit-non-zero-on-fix]
@@ -37,11 +37,11 @@ repos:
     hooks:
     -   id: poetry-check
     -   id: poetry-lock
-    -   id: poetry-export
+    # -   id: poetry-export
         args: ["-f", "requirements.txt", "-o", "requirements.txt"]
 
 -   repo: https://github.com/commitizen-tools/commitizen
-    rev: v3.10.0
+    rev: v4.9.1
     hooks:
     -   id: commitizen
         stages: [commit-msg]
