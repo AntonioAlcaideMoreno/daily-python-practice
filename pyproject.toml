@@ -76,7 +76,19 @@ disallow_untyped_defs = true
 
 [tool.pytest.ini_options]
 minversion = "7.0"
-addopts = "-ra -q --cov=src"
-testpaths = [
-    "src/tests",
+addopts = [
+    "-ra",
+    "--cov=src",
+    "--import-mode=importlib",
+    "--strict-markers",
+    "-v",
 ]
+testpaths = [
+    "tests",           # Root-level tests directory
+    "src/tests",       # Tests inside src directory
+]
+pythonpath = ["src"]
+
+[project.scripts]
+exercise-0001 = "exercises.recursive_nested_list_function:main"
+exercise-0002 = "exercises.fibonaccy:main"
