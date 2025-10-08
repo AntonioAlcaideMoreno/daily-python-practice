@@ -92,3 +92,4 @@ pythonpath = ["src"]
 [project.scripts]
 exercise-0001 = "exercises.recursive_nested_list_function:main"
 exercise-0002 = "exercises.fibonacci:main"
+exercise-0003 = "exercises.handle_shopping_cart:main

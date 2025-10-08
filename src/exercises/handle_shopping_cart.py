@@ -26,3 +26,11 @@ def handle_shopping_cart(orders):
                 print("Unexpected error ocurred!")
     # Return completed shopping cart
     return shopping_cart
+
+def main():
+    # Main entry point - calls the function handle_shopping_cart and prints result.
+    orders = ["apple:2", "banana:3", "apple:1", "orange:-1", "grape:two", "kiwi-4"]
+    print(handle_shopping_cart(orders))
+
+if __name__ == "__main__":
+    main()
