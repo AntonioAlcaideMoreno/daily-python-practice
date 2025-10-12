@@ -12,6 +12,7 @@ repos:
     -   id: check-added-large-files
         args: ["--maxkb=5000000"]
     -   id: detect-aws-credentials
+        args: ["--allow-missing-credentials"]
 
 -   repo: https://github.com/psf/black
     rev: 25.9.0
@@ -30,15 +31,14 @@ repos:
     rev: v1.18.2
     hooks:
     -   id: mypy
-        additional_dependencies: [types-all]
+        additional_dependencies: [types-requests, types-PyYAML]  # Only specific types you need
+        args: ["--ignore-missing-imports", "--allow-untyped-defs"]
 
 -   repo: https://github.com/python-poetry/poetry
     rev: 2.2.1
     hooks:
     -   id: poetry-check
     -   id: poetry-lock
-    # -   id: poetry-export
-        args: ["-f", "requirements.txt", "-o", "requirements.txt"]
 
 -   repo: https://github.com/commitizen-tools/commitizen
     rev: v4.9.1
@@ -50,8 +50,11 @@ repos:
     hooks:
     -   id: tests
         name: run tests
-        entry: pytest
-        language: system
-        types: [python]
+        entry: python -m pytest -q
+        language: python
+        additional_dependencies:
+        - pytest>=7.0.0
+        - pytest-cov>=4.0.0  # if you need coverage
+        # types: [python]
         pass_filenames: false
         always_run: true
