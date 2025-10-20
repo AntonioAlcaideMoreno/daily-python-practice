@@ -120,5 +120,5 @@ class BankAccount:
         balance, and interest rate."""
         print(
             f"Account Owner: {self.__owner_name}\nBalance: ${self.__balance}\n"
-            f"Interest Rate: {self.interest_rate*100}%"
+            f"Interest Rate [%]: {self.interest_rate*100}"
         )

@@ -96,7 +96,7 @@ def test_display_info(basic_account, capsys):
     expected_output = (
         f"Account Owner: {basic_account.owner_name}\n"
         f"Balance: ${basic_account.balance}\n"
-        f"Interest Rate: {BankAccount.interest_rate*100}%\n"
+        f"Interest Rate [%]: {BankAccount.interest_rate*100}\n"
     )
 
     assert captured.out == expected_output
