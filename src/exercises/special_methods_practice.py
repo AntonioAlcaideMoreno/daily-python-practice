@@ -36,8 +36,10 @@ class Money:
 
     def _to_decimal(self, amount):
         """Convert value to Decimal and quantize to 2 decimal places."""
-        if not isinstance(amount, (int, float, Decimal)):
-            raise ValueError("Amount should be a numeric value")
+        try:
+            amount = float(amount)
+        except (ValueError, TypeError) as err:
+            raise ValueError("Amount should be a numeric value") from err
         # Convert via str to avoid float imprecision when value is a float
         dec = Decimal(str(amount)) if not isinstance(amount, Decimal) else amount
         return dec.quantize(self._CENT, rounding=ROUND_HALF_EVEN)
