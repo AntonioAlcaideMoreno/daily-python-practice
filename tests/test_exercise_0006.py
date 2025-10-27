@@ -16,12 +16,12 @@ def test_init_and_quantize_with_float_and_string():
 
 
 def test_add_same_currency():
-    a = Money("10.51", "USD")
-    b = Money("5.25", "USD")
+    a = Money("10.50", "USD")
+    b = Money("5.24", "USD")
     c = a + b
     assert isinstance(c, Money)
     assert c.currency == "USD"
-    assert c.amount == Decimal("15.76")
+    assert c.amount == Decimal("15.74")
 
 
 def test_add_different_currency_raises():
