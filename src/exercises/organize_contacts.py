@@ -30,9 +30,8 @@ def valid_email(email):
     elif len(email.split("@")) == 2 and len(email.split(".")) == 2:
         logger.info(f"Email validation succeeded: {email}")
         return True
-    else:
-        logger.info(f"Email validation failed: {email}")
-        return False
+    logger.info(f"Email validation failed: {email}")
+    return False
 
 
 def valid_phone(phone):

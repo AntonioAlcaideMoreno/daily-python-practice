@@ -81,7 +81,7 @@ class SecureMessenger:
             - Keeps the internal list intact (no deletion or mutation performed).
         """
         if self.__is_logged_in:
-            if self.__messages == []:
+            if not self.__messages:
                 return "No messages"
             return "\n".join(self.__messages)
         return "Error: You must be logged in to view messages"
