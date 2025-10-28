@@ -12,7 +12,7 @@ def fibonacci(n):
             ValueError: If n is negative
             ValueError: If n is not an integer
     """
-    if type(n) is not int:
+    if not isinstance(n, int):
         raise ValueError("Value should be an integer value > 0")
     elif n < 0:
         raise ValueError("Value should be > 0")
