@@ -1,0 +1,15 @@
+LIBRARY:
+  CEL:
+    EXPRESSIONS:
+      DIAMETER = 0.0264898 [m]
+      LAMBDA = 0.0252 [W m^-1 K^-1]
+      QBULK = 300.0 [W m^-2]
+      TBULK = 293.0 [K]
+      UBULK = 15.4515 [m s^-1]
+      NU0 = QBULK * DIAMETER / LAMBDA / (Temperature - TBULK)
+      UWNOR0 = (Velocity u^2+Velocity w^2)^0.5/UBULK
+      RTOD0 = (Y^2+Z^2)^0.5 /DIAMETER
+      XTOD0 = X/DIAMETER
+    END
+  END
+END
