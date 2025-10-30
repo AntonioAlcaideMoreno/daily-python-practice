@@ -23,7 +23,7 @@ def handle_shopping_cart(orders):
                 print(f"Invalid quantity: {order}")
         except Exception:
             # Manage unexpected errors
-            print("Unexpected error ocurred!")
+            print("Unexpected error ocurred. Please check the order format.")
     # Return completed shopping cart
     return shopping_cart
 
