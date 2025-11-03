@@ -1,8 +1,8 @@
 import pytest
 
 # Tests for recursive_nested_list_function.py file
-
 from exercises.recursive_nested_list_function import sum_nested_list
+
 
 def test_sum_nested_list():
     assert sum_nested_list([1, 2, [3, 4], 5]) == 15

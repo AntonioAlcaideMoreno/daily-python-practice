@@ -7,7 +7,7 @@ name = "daily-python-practice"
 version = "0.1.0"
 description = "Repository for daily Python practice exercises and learning activities"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.11"
 license = "MIT"
 authors = [
     {name = "Antonio Alcaide Moreno", email = "antonion1995@gmail.com"}
@@ -18,11 +18,11 @@ classifiers = [
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "Topic :: Education",
-    "Topic :: Software Development :: Libraries :: Python Modules"
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Operating System :: OS Independent"
 ]
 
 [tool.hatch.build]
@@ -32,7 +32,8 @@ dev-mode-dirs = ["src"]
 
 [tool.hatch.build.targets.wheel]
 # Refer to the importable package name, not the on-disk path:
-packages = ["src/exercises"]
+# packages = ["src/exercises"]      # This command was working with Windows but not with Ubuntu
+packages = ["exercises"]
 
 [tool.hatch.build.targets.editable]
 # Same source root for editable installs:
@@ -60,19 +61,20 @@ Repository = "https://github.com/AntonioAlcaideMoreno/daily-python-practice.git"
 
 [tool.black]
 line-length = 88
-target-version = ["py39", "py310", "py311"]
+target-version = ["py311", "py312"]
 include = '\.pyi?$'
 
 [tool.ruff]
 line-length = 88
-target-version = "py39"
+target-version = "py311"
 lint.select = ["E", "F", "B", "I"]
 
 [tool.mypy]
-python_version = "3.9"
+python_version = "3.11"
 warn_return_any = true
 warn_unused_configs = true
 disallow_untyped_defs = true
+ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 minversion = "7.0"
