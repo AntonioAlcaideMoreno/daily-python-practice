@@ -32,7 +32,8 @@ dev-mode-dirs = ["src"]
 
 [tool.hatch.build.targets.wheel]
 # Refer to the importable package name, not the on-disk path:
-packages = ["src/exercises"]
+# packages = ["src/exercises"]      # This command was working with Windows but not with Ubuntu
+packages = ["exercises"]
 
 [tool.hatch.build.targets.editable]
 # Same source root for editable installs:
