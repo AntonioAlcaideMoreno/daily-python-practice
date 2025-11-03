@@ -6,7 +6,7 @@ import pytest
 import exercises.beverage as _bev_mod
 from exercises.beverage import DarkRoast, Decaf, Espresso, HouseBlend
 
-"""Ensure condiment_decorator can import the Beverage base when it does a top-level
+"""Ensure condiment_decorator can import the Beverage base when it does any top-level
 import operation.
 The source files live under src/exercises; tests run with src on sys.path in this
 project, so we load the package module and insert it as the top-level name 'beverage'
