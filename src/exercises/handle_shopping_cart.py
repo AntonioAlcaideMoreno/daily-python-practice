@@ -29,7 +29,8 @@ def handle_shopping_cart(orders):
 
 
 def main():
-    # Main entry point - calls the function handle_shopping_cart and prints result.
+    # Main entry point - calls the function handle_shopping_cart and prints result of
+    # output.
     orders = ["apple:2", "banana:3", "apple:1", "orange:-1", "grape:two", "kiwi-4"]
     print(handle_shopping_cart(orders))
     return None
