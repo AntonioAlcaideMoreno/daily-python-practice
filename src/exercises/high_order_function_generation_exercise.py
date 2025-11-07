@@ -20,7 +20,7 @@ def count(predicate: Callable[[T], bool], iterable: Iterable[T]) -> int:
     """
     Count how many items in `iterable` satisfy `predicate`.
 
-    Uses an iterator-friendly approach (no intermediate list).
+    Uses an iterator-friendly approach (no intermediate list is used).
     """
     return sum(1 for item in iterable if predicate(item))
 
