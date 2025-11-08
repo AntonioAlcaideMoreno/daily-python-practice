@@ -18,7 +18,7 @@ T = TypeVar("T")
 
 def count(predicate: Callable[[T], bool], iterable: Iterable[T]) -> int:
     """
-    Count how many items in `iterable` satisfy `predicate`.
+    Count how many items in `iterable` satisfy the `predicate`.
 
     Uses an iterator-friendly approach (no intermediate list is used).
     """
