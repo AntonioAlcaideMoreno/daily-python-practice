@@ -18,7 +18,7 @@ def sum_nested_list(nested_list):
 
 
 def main():
-    # Main entry point - calls the function sum nested and prints result.
+    # Main entry point - calls the function sum nested and prints results.
     print(sum_nested_list([1, 2, [3, 4], 5]))
 
 
