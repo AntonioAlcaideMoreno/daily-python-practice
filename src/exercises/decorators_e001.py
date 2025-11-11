@@ -35,6 +35,14 @@ def timer_decorator(func):
     @wraps(func)  # This preserves the original function's name and docstring
     def wrapper(*args, **kwargs):
         # TODO: Capture the start time using time.time()
+        """
+        Wrapper captures the original function's execution time.
+
+        *args, **kwargs: Allow this decorator to work with ANY function,
+        regardless of its parameters. For example:
+        - greet(name) with 1 positional arg → captured in args
+        - api_call(url, timeout=30) with mixed args → captured in both
+        """
         start_time = (
             time.time()
         )  # If we want this to be more accurate, we should use time.perf_counter()
