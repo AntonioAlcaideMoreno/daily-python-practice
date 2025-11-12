@@ -86,7 +86,6 @@ def validate_positive(*arg_names):
                         )
             # If all validations pass, execute and return the function
             return func(*args, **kwargs)
-            return func(*args, **kwargs)
 
         return wrapper
 
