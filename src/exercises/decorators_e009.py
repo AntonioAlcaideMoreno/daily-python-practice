@@ -193,7 +193,7 @@ class LoggingContext:
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        """Called on exit (even if exception)"""
+        """Called on exit (even if exception occurs)"""
         if exc_type is None:
             print(f"[LOG] <<< Exiting {self.function_name} (success)")
         else:
