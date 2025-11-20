@@ -208,7 +208,7 @@ class LoggingContext:
 
 def logged_execution(func):
     """
-    Decorator that logs function entry/exit with exception handling.
+    Decorator that logs function entry / exit with exception handling.
     """
 
     @wraps(func)
