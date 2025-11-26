@@ -10,9 +10,9 @@ from functools import wraps
 
 class DatabaseConnection:
     """
-    Simulates a database connection that needs cleanup.
+    Simulates a database connection that needs cleanup
 
-    Demonstrates resource management: open on entry, close on exit.
+    Demonstrates resource management: open on entry, close on exit
     """
 
     def __init__(self, connection_string):
