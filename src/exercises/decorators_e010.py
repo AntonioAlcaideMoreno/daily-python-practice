@@ -10,9 +10,9 @@ from functools import update_wrapper, wraps
 # Pattern 1: Stacking Multiple Behaviors
 class FunctionProfiler:
     """
-    A decorator that profiles function execution: timing, call count, arguments.
+    A decorator that profiles function execution: timing, call count, arguments
 
-    Demonstrates combining multiple metrics into one decorator.
+    Demonstrates combining multiple metrics into one decorator
     """
 
     def __init__(self, func):
