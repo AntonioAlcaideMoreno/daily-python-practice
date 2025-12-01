@@ -17,7 +17,7 @@ class ValidatedProperty:
     When you access obj.attr, Python calls descriptor.__get__(obj, type(obj))
     When you assign obj.attr = value, Python calls descriptor.__set__(obj, value)
 
-    This enables implementing properties, type checking, caching, etc.
+    This enables implementing properties, type checking, caching, etcetera
     """
 
     def __init__(self, name, validator=None, default=None):
