@@ -4,6 +4,8 @@ Decorators exercise 10 decorators_e010: Advanced Decorator Composition & Pattern
 Concepts: Decorator stacking, composition, metaprogramming and frameworks
 """
 
+import inspect
+import time
 from functools import update_wrapper, wraps
 
 
@@ -32,7 +34,21 @@ class FunctionProfiler:
         5. Store metrics (total_time, individual times)
         6. Return result
         """
-        pass
+        # 1. Start time
+        start_time = time.time()
+        # 2. Increment call count
+        self.call_count += 1
+        # 3. Execute function
+        try:
+            result = self.func(*args, **kwargs)
+        finally:
+            # 4. Record end time
+            end_time = time.time()
+            elapsed = end_time - start_time
+            # 5. Store metrics
+            self.total_time += elapsed
+            self.call_times.append(elapsed)
+        return result
 
     def get_stats(self):
         """Return profiling statistics"""
@@ -42,7 +58,21 @@ class FunctionProfiler:
         # - average_time
         # - min_time
         # - max_time
-        pass
+        if not self.call_times:
+            return {}
+
+        return {
+            "call_count": self.call_count,
+            "total_time": self.total_time,
+            "average_time": (
+                self.total_time / self.call_count
+                if self.call_count
+                else "No average time available"
+            ),
+            "min_time": min(self.call_times),
+            "max_time": max(self.call_times),
+            "function_name": self.func.__name__,
+        }
 
 
 # Pattern 2: Decorator Chains with Configuration
@@ -66,24 +96,103 @@ class DecoratorChain:
 
     def with_timing(self):
         """Add timing functionality"""
+
         # TODO: Add timing decorator to chain
-        pass
+        def timing_decorator(func):
+            @wraps(func)
+            def wrapper(*args, **kwargs):
+                start_time = time.time()
+                try:
+                    result = func(*args, **kwargs)
+                finally:
+                    elapsed = time.time() - start_time
+                    print(f"[TIMER] executed in {elapsed:.4f}s")
+                return result
+
+            return wrapper
+
+        self.decorators.append(timing_decorator)
+        return self
 
     def with_logging(self, level="INFO"):
         """Add logging functionality"""
         # TODO: Add logging decorator to chain
-        pass
+        level = level.upper()
+
+        def logging_decorator(func):
+            @wraps(func)
+            def wrapper(*args, **kwargs):
+                print(
+                    f"[{level}] Entering function {func.__name__} with args={args},"
+                    + f" kwargs={kwargs}"
+                )
+                try:
+                    result = func(*args, **kwargs)
+                finally:
+                    print(
+                        f"[{level}] Exiting function {func.__name__}"
+                        + f" with result={result}"
+                    )
+                return result
+
+            return wrapper
+
+        self.decorators.append(logging_decorator)
+        return self
 
     def with_caching(self, max_size=128):
         """Add caching functionality"""
+        self.cache = {}
+        self.cache_hit_miss = {"Cache Hits": 0, "Cache Misses": 0}
+        self.sig = inspect.signature(self.func)
+        self.max_cache_size = max_size
+
         # TODO: Add caching decorator to chain
-        pass
+        def caching_decorator(func):
+            @wraps(func)
+            def wrapper(*args, **kwargs):
+                # We create a cache key
+                bound_args = self.sig.bind(*args, **kwargs)
+                bound_args.apply_defaults()
+                cache_key = tuple(
+                    (k, bound_args.arguments[k]) for k in bound_args.arguments
+                )
+                # We check if in cache
+                if cache_key in self.cache:
+                    print(
+                        "[CACHE] Cache hit. Returning cached result for "
+                        + f"function {func.__name__}"
+                    )
+                    self.cache_hit_miss["Cache Hits"] += 1
+                    return self.cache[cache_key]
+                else:
+                    print("[CACHE] Cache miss")
+                    self.cache_hit_miss["Cache Misses"] += 1
+                    try:
+                        result = func(*args, **kwargs)
+                    finally:
+                        if len(self.cache) >= self.max_cache_size:
+                            self.cache.pop(next(iter(self.cache)))
+                            """ Iter creates an iterator over dictionary's keys.
+                            From Python 3.7 onwards, dictionaries maintain insertion
+                            order, so popping the first key effectively removes the
+                            oldest entry in the cache. Next is just used to go
+                            to the first key from the iterator."""
+                        self.cache[cache_key] = result
+                    return result
+                return wrapper
+
+            self.decorators.append(caching_decorator)
+            return self
 
     def build(self):
         """Apply all decorators and return wrapped function"""
+        result = self.func
+        for decorator in self.decorators:
+            result = decorator(result)
+        return result
         # TODO: Apply decorators in order and return result
         # Hint: Start with self.func, apply each decorator
-        pass
 
 
 # Pattern 3: Conditional Decorators
@@ -102,7 +211,10 @@ def apply_if(condition, decorator):
     def wrapper(func):
         # TODO: If condition is true, apply decorator
         # Otherwise, return function unchanged
-        pass
+        if condition:
+            return decorator(func)
+        else:
+            return func
 
     return wrapper
 
@@ -132,19 +244,35 @@ class DecoratorWithHooks:
 
     def __call__(self, func):
         """Applied as a decorator"""
+
         # TODO: Implement decorator logic
         # Calls before_hooks, func, then after_hooks
-        pass
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            for b_hook in self.before_hooks:
+                b_hook()
+            try:
+                result = func(*args, **kwargs)
+            finally:
+                for a_hook in self.after_hooks:
+                    a_hook()
+            return result
+
+        return wrapper
 
     def before(self, hook_func):
         """Register a before-execution hook"""
         # TODO: Add hook to self.before_hooks
-        pass
+        if hook_func and hook_func not in self.before_hooks:
+            self.before_hooks.append(hook_func)
+        return hook_func
 
     def after(self, hook_func):
         """Register an after-execution hook"""
         # TODO: Add hook to self.after_hooks
-        pass
+        if hook_func and hook_func not in self.after_hooks:
+            self.after_hooks.append(hook_func)
+        return hook_func
 
 
 # Pattern 5: Decorator That Inspects and Adapts
