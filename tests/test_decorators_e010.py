@@ -17,7 +17,7 @@ from pathlib import Path
 
 import pytest
 
-# Ensure src/ is on sys.path for consistent imports across environments
+# Ensure src/ is on sys.path for consistent imports across environments (different OS)
 repo_src = Path(__file__).resolve().parent.parent
 if str(repo_src) not in sys.path:
     sys.path.insert(0, str(repo_src))
