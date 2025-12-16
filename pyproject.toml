@@ -68,7 +68,7 @@ include = '\.pyi?$'
 line-length = 88
 target-version = "py311"
 lint.select = ["E", "F", "B", "I"]
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "tests/**"=["E402"]
 
 [tool.mypy]
