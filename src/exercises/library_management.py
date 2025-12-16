@@ -13,8 +13,10 @@ handling) but includes clear docstrings and comments to make the logic
 easy to follow for new readers.
 """
 
-from __future__ import annotations
+from __future__ import annotations  # Reccommended for full PEP563 compliance, since
 
+# we are using type hints that reference classes
+# defined later in the file
 from typing import Dict, List, Optional
 
 
@@ -29,7 +31,8 @@ class Book:
         borrower (Optional[User]): The user who borrowed the book (if any)
     """
 
-    borrower: Optional["User"]
+    borrower: Optional["User"]  # We needed to use this "string like annotation" to
+    # avoid circular references with a forward declaration
 
     def __init__(self, title: str, author: str, isbn: str):
         self.title = title
